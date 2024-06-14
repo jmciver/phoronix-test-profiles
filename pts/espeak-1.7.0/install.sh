@@ -9,7 +9,7 @@ echo $? > ~/install-exit-status
 make install
 cd ~
 rm -rf espeak-ng-1.51
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 echo "#!/bin/sh
 cd espeak_/bin/
 LD_LIBRARY_PATH=\$HOME/espeak_/lib/:\$LD_LIBRARY_PATH $TASKSET ./espeak-ng -f ~/gutenberg-science.txt -w espeak-output 2>&1

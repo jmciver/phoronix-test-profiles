@@ -16,7 +16,7 @@ echo $? > ~/install-exit-status
 
 cd ~
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 echo "#!/bin/sh
 cd libjpeg-turbo-2.1.0/build

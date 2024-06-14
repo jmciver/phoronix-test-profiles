@@ -6,7 +6,7 @@ sed -i 's/^CC=/#CC=/g' src/Makefile
 make -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 cd ~
 echo "#!/bin/sh

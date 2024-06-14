@@ -14,7 +14,7 @@ else
 fi
 make install
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 cd ~
 rm -rf flac-1.4.2

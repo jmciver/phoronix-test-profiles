@@ -13,7 +13,7 @@ fi
 $CC himenobmtxpa.c -O3 $CFLAGS -o himenobmtxpa
 echo $? > ~/install-exit-status
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 echo "#!/bin/sh
 $TASKSET ./himenobmtxpa s > \$LOG_FILE 2>&1
 echo \$? > ~/test-exit-status" > himeno

@@ -6,7 +6,7 @@ $CC $CFLAGS -o scimark2 *.c -lm
 echo $? > ~/install-exit-status
 cd ..
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 echo "#!/bin/sh
 cd scimark2_files/
 $TASKSET ./scimark2 -large > \$LOG_FILE 2>&1" > scimark2

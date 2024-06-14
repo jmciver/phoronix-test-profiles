@@ -40,7 +40,7 @@ then
 	sed -i -e "s|/bin/bash|/usr/pkg/bin/bash|g" mafft_/mafft
 fi
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 cat>mafft<<EOT
 #!/bin/sh
 cd mafft_/

@@ -15,7 +15,7 @@ else
 fi
 cd ~
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 echo "#!/bin/sh
 $TASKSET primesieve-$version/./primesieve -t 1 \$@ > \$LOG_FILE 2>&1
 echo \$? > ~/test-exit-status" > primesieve-test

@@ -33,7 +33,7 @@ cd ~/fftw-stock
 ./configure --enable-threads $AVX_TUNING
 make -j $NUM_CPU_JOBS
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 cd ~/
 echo "

@@ -11,7 +11,7 @@ else
 	echo $? > ~/install-exit-status
 fi
 cd ~
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 echo "#!/bin/bash
 cd QuantLib-1.32/build
 $TASKSET ./test-suite/quantlib-benchmark > \$LOG_FILE 2>&1

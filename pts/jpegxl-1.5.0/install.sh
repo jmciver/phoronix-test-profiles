@@ -10,7 +10,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_FORCE_SYSTEM_BR
 cmake --build . -- -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 cd ~
 echo "#!/bin/sh

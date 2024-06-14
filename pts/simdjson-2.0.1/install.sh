@@ -12,7 +12,7 @@ make -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 cd ~
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 echo "#!/bin/sh
 cd simdjson-2.0.4/build/benchmark

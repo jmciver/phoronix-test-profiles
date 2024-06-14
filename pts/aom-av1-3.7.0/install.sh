@@ -8,7 +8,7 @@ cd ~
 7z x Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z -aoa
 7z x Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z -aoa
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 echo "#!/bin/sh
 # Current AOMedia Git has MAX_NUM_THREADS value of 64, don't go over 64 threads or error

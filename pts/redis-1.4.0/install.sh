@@ -10,7 +10,7 @@ cd ~/redis-7.0.4
 make MALLOC=libc -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 cd ~
 echo "#!/bin/sh
@@ -24,7 +24,7 @@ $TASKSET ./src/redis-server redis.conf &
 REDIS_SERVER_PID=\$!
 sleep 6
 
-sudo nice -n -20 taskset -c 1 ./src/redis-benchmark \$@ > \$LOG_FILE
+nice -n -20 taskset -c 1 ./src/redis-benchmark \$@ > \$LOG_FILE
 kill \$REDIS_SERVER_PID
 sed \"s/\\\"/ /g\" -i \$LOG_FILE" > redis
 chmod +x redis

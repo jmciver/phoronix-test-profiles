@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 tar -xf sqlite-3460-for-speedtest.tar.gz
 cd sqlite-version-3.46.0

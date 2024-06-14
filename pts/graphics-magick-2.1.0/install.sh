@@ -28,7 +28,7 @@ rm -rf gm_/share/man/
 
 ./gm_/bin/gm convert sample-photo-6000x4000.JPG input.mpc
 
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 
 echo "#!/bin/sh
 $TASKSET ./gm_/bin/gm benchmark -duration 60 convert input.mpc \$@ null: > \$LOG_FILE 2>&1

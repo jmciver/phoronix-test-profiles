@@ -4,7 +4,7 @@ cd zstd-1.5.4
 make -j $NUM_CPU_CORES
 echo $? > ~/install-exit-status
 cd ~
-TASKSET="sudo nice -n -20 taskset -c 1"
+TASKSET="nice -n -20 taskset -c 1"
 cat > compress-zstd <<EOT
 #!/bin/sh
 $TASKSET ./zstd-1.5.4/zstd -T1 \$@ silesia.tar > \$LOG_FILE 2>&1
