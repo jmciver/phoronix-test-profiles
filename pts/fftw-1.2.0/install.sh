@@ -30,7 +30,7 @@ make -j $NUM_CPU_JOBS
 echo $? > ~/install-exit-status
 
 cd ~/fftw-stock
-./configure --enable-threads $AVX_TUNING
+./configure --enable-float --enable-threads $AVX_TUNING
 make -j $NUM_CPU_JOBS
 
 TASKSET="nice -n -20 taskset -c 1"
