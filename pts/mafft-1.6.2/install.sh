@@ -5,29 +5,21 @@ mkdir $HOME/mafft_
 tar -xvf mafft-7.471-without-extensions-src.tgz
 cd mafft-7.471-without-extensions/core/
 
-if [ $OS_TYPE = "BSD" ]
-then
-	gmake clean
-else
-	make clean
+MAKE_PROGRAM=make
+if [ $OS_TYPE = "BSD" ]; then
+    MAKE_PROGRAM=gmake
 fi
+"$MAKE_PROGRAM" clean
 
 sed -i -e "s|PREFIX = /usr/local|PREFIX = $HOME/mafft_|g" Makefile
 
-if [ $OS_TYPE = "BSD" ]
-then
-	gmake -j $NUM_CPU_CORES ENABLE_MULTITHREAD=-Denablemultithread
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" "ENABLE_MULTITHREAD=-Denablemultithread"
 else
-	make -j $NUM_CPU_CORES ENABLE_MULTITHREAD=-Denablemultithread
+    "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" "ENABLE_MULTITHREAD=-Denablemultithread"
 fi
-
 echo $? > ~/install-exit-status
-if [ $OS_TYPE = "BSD" ]
-then
-	gmake install
-else
-	make install
-fi
+"$MAKE_PROGRAM" install
 cd ~/
 cp -f mafft-7.471-without-extensions/scripts/mafft mafft_/
 rm -rf mafft-7.471-without-extensions/

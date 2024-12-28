@@ -2,7 +2,11 @@
 tar -xf aom-370.tar.xz
 cd aom/build
 cmake -DENABLE_DOCS=0 -DENABLE_TESTS=0 -DCONFIG_AV1_DECODER=0 -DCMAKE_BUILD_TYPE=Release ..
-make -j $NUM_CPU_CORES
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+else
+    make "-j${NUM_CPU_CORES}"
+fi
 echo $? > ~/install-exit-status
 cd ~
 7z x Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z -aoa

@@ -6,20 +6,19 @@ unzip -o sample-photo-6000x4000-1.zip
 mkdir $HOME/gm_
 cd GraphicsMagick-1.3.38/
 LDFLAGS="-L$HOME/gm_/lib" CPPFLAGS="-I$HOME/gm_/include" ./configure --without-perl --prefix=$HOME/gm_ --without-png --disable-openmp > /dev/null
-if [ $OS_TYPE = "BSD" ]
-then
-	gmake -j $NUM_CPU_CORES
+MAKE_PROGRAM=make
+if [ $OS_TYPE = "BSD" ]; then
+   MAKE_PROGRAM=gmake
+fi
+
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
 else
-	make -j $NUM_CPU_CORES
+    "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
 fi
 
 echo $? > ~/install-exit-status
-if [ $OS_TYPE = "BSD" ]
-then
-	gmake install
-else
-	make install
-fi
+"$MAKE_PROGRAM" install
 
 cd ~
 rm -rf GraphicsMagick-1.3.38/

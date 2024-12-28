@@ -48,7 +48,11 @@ fi
 
 cd fftw-mr
 ./configure --enable-float --enable-threads $AVX_TUNING
-make -j $NUM_CPU_JOBS
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_JOBS}"
+else
+    make "-j${NUM_CPU_JOBS}"
+fi
 echo $? > ~/install-exit-status
 
 cd ~/fftw-stock

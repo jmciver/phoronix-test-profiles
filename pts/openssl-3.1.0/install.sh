@@ -2,7 +2,11 @@
 tar -xf openssl-3.1.0.tar.gz
 cd openssl-3.1.0
 ./config no-zlib
-make -j $NUM_CPU_CORES
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+else
+    make "-j${NUM_CPU_CORES}"
+fi
 echo $? > ~/install-exit-status
 cd ~
 TASKSET="nice -n -20 taskset -c 1"

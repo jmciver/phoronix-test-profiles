@@ -4,7 +4,12 @@ tar -xf espeak-ng-1.51.tar.gz
 cd espeak-ng-1.51
 ./autogen.sh
 ./configure --prefix=$HOME/espeak_
-make # build seems to have problems with multiple cores
+# build seems to have problems with multiple cores.
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+  "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make
+else
+    make
+fi
 echo $? > ~/install-exit-status
 make install
 cd ~

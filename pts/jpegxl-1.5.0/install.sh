@@ -7,7 +7,11 @@ cd libjxl-0.7.0
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DJPEGXL_FORCE_SYSTEM_BROTLI=ON
-cmake --build . -- -j $NUM_CPU_CORES
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" cmake --build . -- "-j${NUM_CPU_CORES}"
+else
+    cmake --build . -- "-j${NUM_CPU_CORES}"
+fi
 echo $? > ~/install-exit-status
 
 TASKSET="nice -n -20 taskset -c 1"

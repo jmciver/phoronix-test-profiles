@@ -3,18 +3,20 @@ tar -xf aircrack-ng-1.7.tar.gz
 cd aircrack-ng-1.7
 export CFLAGS="-O3 -fcommon $CFLAGS"
 export CXXFLAGS="-O3 -fcommon $CXFLAGS"
-if [ "$OS_TYPE" = "BSD" ]
-then
-	if [ -e /usr/local/lib/libcrypto.so ]
-	then
-		env MAKE=gmake CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ./autogen.sh
-	else
-		env MAKE=gmake ./autogen.sh
-	fi
-	gmake -j $NUM_CPU_CORES
+if [ "$OS_TYPE" = "BSD" ]; then
+    if [ -e /usr/local/lib/libcrypto.so ]; then
+	env MAKE=gmake CFLAGS=-I/usr/local/include LDFLAGS=-L/usr/local/lib ./autogen.sh
+    else
+	env MAKE=gmake ./autogen.sh
+    fi
+    gmake "-j${NUM_CPU_CORES}"
 else
-	./autogen.sh
-	make -j $NUM_CPU_CORES
+    ./autogen.sh
+    if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+        "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+    else
+        make "-j${NUM_CPU_CORES}"
+    fi
 fi
 echo $? > ~/install-exit-status
 

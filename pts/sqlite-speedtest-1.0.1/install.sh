@@ -5,11 +5,14 @@ TASKSET="nice -n -20 taskset -c 1"
 tar -xf sqlite-3460-for-speedtest.tar.gz
 cd sqlite-version-3.46.0
 ./configure
-if [ $OS_TYPE = "BSD" ]
-then
-	gmake speedtest1
+MAKE_PROGRAM=make
+if [ $OS_TYPE = "BSD" ]; then
+    MAKE_PROGRAM=gmake
+fi
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" speedtest1
 else
-	make speedtest1
+    "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" speedtest1
 fi
 echo $? > ~/install-exit-status
 

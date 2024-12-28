@@ -6,11 +6,14 @@ cd libjpeg-turbo-2.1.0
 mkdir build
 cd build
 cmake ..
-if [ "$OS_TYPE" = "BSD" ]
-then
-	gmake -j $NUM_CPU_CORES
+MAKE_PROGRAM=make
+if [ "$OS_TYPE" = "BSD" ]; then
+    MAKE_PROGRAM=gmake
+fi
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
 else
-	make -j $NUM_CPU_CORES
+    "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
 fi
 echo $? > ~/install-exit-status
 

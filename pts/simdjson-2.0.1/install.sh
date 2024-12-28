@@ -1,14 +1,21 @@
 #!/bin/sh
 
-rm -rf simdjson-2.0.4
-tar -xf simdjson-2.0.4.tar.gz
+if [[ -z "$ALIVECC_PARALLEL_FIFO" || ! -d simdjson-2.0.4 ]]; then
+    rm -rf simdjson-2.0.4
+    tar -xf simdjson-2.0.4.tar.gz
+fi
 cd simdjson-2.0.4
 sed -i '734i (void) count;' tests/dom/document_stream_tests.cpp
 
 mkdir build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DSIMDJSON_JUST_LIBRARY=OFF
-make -j $NUM_CPU_CORES
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DSIMDJSON_JUST_LIBRARY=ON
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+else
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DSIMDJSON_JUST_LIBRARY=OFF
+    make "-j$NUM_CPU_CORES"
+fi
 echo $? > ~/install-exit-status
 cd ~
 

@@ -6,13 +6,21 @@ tar -zxvf pbzip2-1.1.13.tar.gz
 grep -rl "CC=gcc" . | xargs sed -i '/CC=gcc/d'
 
 cd bzip2-1.0.8/
-make
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+else
+    make "-j${NUM_CPU_CORES}"
+fi
 cp -f libbz2.a ../pbzip2-1.1.13
 cp -f bzlib.h ../pbzip2-1.1.13
 cd ..
 cd pbzip2-1.1.13/
 grep -rl PRIuMAX . | xargs sed -i 's/PRIuMAX/ PRIuMAX /g'
-make pbzip2-static
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}" pbzip2-static
+else
+    make "-j${NUM_CPU_CORES}" pbzip2-static
+fi
 echo $? > ~/install-exit-status
 
 cd ~

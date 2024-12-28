@@ -4,7 +4,11 @@ cd draco-1.5.6
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
-make -j $NUM_CPU_CORES
+if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+else
+    make "-j${NUM_CPU_CORES}"
+fi
 echo $? > ~/install-exit-status
 cd ~
 unzip -o church-facade-ply.zip
