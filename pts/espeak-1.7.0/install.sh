@@ -13,7 +13,9 @@ fi
 echo $? > ~/install-exit-status
 make install
 cd ~
-rm -rf espeak-ng-1.51
+if [[ -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    rm -rf espeak-ng-1.51
+fi
 TASKSET="nice -n -20 taskset -c 1"
 echo "#!/bin/sh
 cd espeak_/bin/

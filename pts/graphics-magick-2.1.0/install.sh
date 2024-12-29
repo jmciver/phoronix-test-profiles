@@ -21,9 +21,11 @@ echo $? > ~/install-exit-status
 "$MAKE_PROGRAM" install
 
 cd ~
-rm -rf GraphicsMagick-1.3.38/
-rm -rf gm_/share/doc/GraphicsMagick/
-rm -rf gm_/share/man/
+if [[ -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    rm -rf GraphicsMagick-1.3.38/
+    rm -rf gm_/share/doc/GraphicsMagick/
+    rm -rf gm_/share/man/
+fi
 
 ./gm_/bin/gm convert sample-photo-6000x4000.JPG input.mpc
 

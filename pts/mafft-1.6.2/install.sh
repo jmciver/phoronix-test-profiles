@@ -16,13 +16,16 @@ sed -i -e "s|PREFIX = /usr/local|PREFIX = $HOME/mafft_|g" Makefile
 if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
     "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" "ENABLE_MULTITHREAD=-Denablemultithread"
 else
+    exit 1
     "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" "ENABLE_MULTITHREAD=-Denablemultithread"
 fi
 echo $? > ~/install-exit-status
 "$MAKE_PROGRAM" install
 cd ~/
 cp -f mafft-7.471-without-extensions/scripts/mafft mafft_/
-rm -rf mafft-7.471-without-extensions/
+if [[ -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    rm -rf mafft-7.471-without-extensions/
+fi
 
 cp mafft-ex1-lsu-rna.txt mafft_
 

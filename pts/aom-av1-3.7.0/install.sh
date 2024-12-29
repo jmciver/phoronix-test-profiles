@@ -9,8 +9,10 @@ else
 fi
 echo $? > ~/install-exit-status
 cd ~
-7z x Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z -aoa
-7z x Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z -aoa
+if [[ -z "$ALIVECC_PARALLEL_FIFO" ]]; then
+    7z x Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z -aoa
+    7z x Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z -aoa
+fi
 
 TASKSET="nice -n -20 taskset -c 1"
 
