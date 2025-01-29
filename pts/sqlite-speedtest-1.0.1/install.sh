@@ -10,7 +10,7 @@ if [ $OS_TYPE = "BSD" ]; then
     MAKE_PROGRAM=gmake
 fi
 if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
-    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" speedtest1
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" sqlite3.o
 else
     "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" speedtest1
 fi
