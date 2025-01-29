@@ -12,7 +12,7 @@ if [ $OS_TYPE = "BSD" ]; then
 fi
 
 if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
-    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
+    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" magick/libGraphicsMagick.la
 else
     "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
 fi
