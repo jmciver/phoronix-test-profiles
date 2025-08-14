@@ -6,6 +6,8 @@ if [[ -z "$ALIVECC_PARALLEL_FIFO" || ! -d simdjson-2.0.4 ]]; then
 fi
 cd simdjson-2.0.4
 sed -i '734i (void) count;' tests/dom/document_stream_tests.cpp
+sed -i 's/operator "" _padded/operator ""_padded/g' singleheader/simdjson.h
+sed -i 's/operator "" _padded/operator ""_padded/g' include/simdjson/padded_string.h
 
 mkdir build
 cd build
