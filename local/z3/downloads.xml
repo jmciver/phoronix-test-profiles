@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--Phoronix Test Suite v10.8.4-->
+<PhoronixTestSuite>
+  <Downloads>
+    <Package>
+      <URL>https://github.com/Z3Prover/z3/releases/download/z3-4.14.0/z3_solver-4.14.0.0.tar.gz</URL>
+      <MD5>197e902524f51cab920d259678e468ab</MD5>
+      <SHA256>83736086dc73f6309a7bb9e45e6a0b6b73de8510b606247b366038f5f40899b4</SHA256>
+      <FileName>z3_solver-4.14.0.0.tar.gz</FileName>
+      <FileSize>5026610</FileSize>
+      <PlatformSpecific>Linux</PlatformSpecific>
+    </Package>
+    <Package>
+      <URL>https://raw.githubusercontent.com/lucic71/test-profiles/ub/assets/calc2_sec2_shifter_mult_bmc30.smt2</URL>
+      <MD5>24d4b83d66709c8a9a9a6f13aecbce6d</MD5>
+      <SHA256>33e688c7195c3d486f264774ec1758613330d099a55e6a452e9b3968c8f28a60</SHA256>
+      <FileName>1.smt2</FileName>
+      <FileSize>581726</FileSize>
+      <PlatformSpecific>Linux</PlatformSpecific>
+    </Package>
+    <Package>
+      <URL>https://raw.githubusercontent.com/lucic71/test-profiles/ub/assets/normalized-j12021_4-sat.smt2</URL>
+      <MD5>70a2da2a37787aa148e3caf9b43b2611</MD5>
+      <SHA256>a98e9e53c037d20cafc2bfa26497ce7effa1fe979eedd32d4c286eb4a37fe5f2</SHA256>
+      <FileName>2.smt2</FileName>
+      <FileSize>9003809</FileSize>
+      <PlatformSpecific>Linux</PlatformSpecific>
+    </Package>
+    <Package>
+      <URL>https://github.com/Z3Prover/z3/releases/download/z3-4.12.1/z3-4.12.1-x64-win.zip</URL>
+      <MD5>9c968fc2580a1084e820e039cd2c1771</MD5>
+      <SHA256>ce2d658d007c4f5873d2279bd031d4e72500b388e1ef2d716bd5f86af19b20d2</SHA256>
+      <FileName>z3-4.12.1-x64-win.zip</FileName>
+      <FileSize>56321060</FileSize>
+      <PlatformSpecific>Windows</PlatformSpecific>
+    </Package>
+  </Downloads>
+</PhoronixTestSuite>
