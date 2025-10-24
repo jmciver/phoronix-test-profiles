@@ -7,12 +7,24 @@ TASKSET="nice -n -20 taskset -c 1"
 tar -xvf z3_solver-${Z3_VERSION}.tar.gz
 
 pushd ${Z3_SRC_DIR} &> /dev/null
-mkdir build && \
-    cd build && \
-    cmake -GNinja -DCMAKE_CXX_COMPILER=$CXX \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DZ3_ENABLE_EXAMPLE_TARGETS=OFF .. && \
-    ninja -j$NUM_CPU_CORES z3
+mkdir build
+pushd build &> /dev/null
+if [[ ! -z "$CLANG_PLUGIN_STATISTICS" ]]; then
+    cmake \
+        -GNinja \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DZ3_ENABLE_EXAMPLE_TARGETS=OFF \
+        -DCMAKE_C_FLAGS_RELEASE="$CLANG_PLUGIN_STATISTICS" \
+        -DCMAKE_CXX_FLAGS_RELEASE="$CLANG_PLUGIN_STATISTICS" .. && \
+        ninja -j$NUM_CPU_CORES z3 |& tee run-build.log
+else
+    cmake \
+        -GNinja -DCMAKE_CXX_COMPILER=$CXX \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DZ3_ENABLE_EXAMPLE_TARGETS=OFF .. && \
+        ninja -j$NUM_CPU_CORES z3
+fi
+popd &> /dev/null
 popd &> /dev/null
 
 echo "#!/bin/sh
