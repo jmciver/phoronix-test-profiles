@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--Phoronix Test Suite v10.2.0m2-->
+<PhoronixTestSuite>
+  <Downloads>
+    <Package>
+      <URL>https://codeload.github.com/sqlite/sqlite/tar.gz/refs/tags/version-3.46.0</URL>
+      <MD5>e605bc32f41b75bfcb22741ef0448d5d</MD5>
+      <SHA256>ae85b5545f6171694f4d7f915e8e87a936fcb1a56409e5fb3da89d52e3c224cc</SHA256>
+      <FileName>sqlite-3460-for-speedtest.tar.gz</FileName>
+      <FileSize>12892680</FileSize>
+    </Package>
+  </Downloads>
+</PhoronixTestSuite>
