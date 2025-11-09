@@ -56,7 +56,7 @@ fi
 echo $? > ~/install-exit-status
 
 cd ~/fftw-stock
-./configure --enable-float --enable-threads $AVX_TUNING
+./configure --enable-float --enable-threads
 make -j $NUM_CPU_JOBS
 
 TASKSET="nice -n -20 taskset -c 1"
