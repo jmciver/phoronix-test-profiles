@@ -12,8 +12,15 @@ if [ $OS_TYPE = "BSD" ]; then
 fi
 
 if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
-    LDFLAGS="-L$HOME/gm_/lib" CPPFLAGS="-I$HOME/gm_/include" ./configure --without-perl --prefix=$HOME/gm_ --without-png --disable-openmp > /dev/null
-    "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}" magick/libGraphicsMagick.la
+    LDFLAGS="-L$HOME/gm_/lib" CPPFLAGS="-I$HOME/gm_/include" ./configure \
+           --without-perl \
+           --prefix=$HOME/gm_ \
+           --without-png \
+           --disable-openmp > /dev/null
+    "$ALIVE2_JOB_SERVER_PATH" \
+        "-j${ALIVE2_JOB_SERVER_THREADS}" \
+        "$MAKE_PROGRAM" "-j${NUM_CPU_CORES}"
+    exit 0
 elif [[ ! -z "$CLANG_PLUGIN_STATISTICS" ]]; then
     LDFLAGS="-L$HOME/gm_/lib" \
     CPPFLAGS="-I$HOME/gm_/include $CLANG_PLUGIN_STATISTICS" \
