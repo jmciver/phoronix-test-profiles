@@ -12,6 +12,7 @@ if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
         -DBUILD_TESTING=OFF \
         -DJPEGXL_FORCE_SYSTEM_BROTLI=ON .. && \
         "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" cmake --build . -- "-j${NUM_CPU_CORES}"
+    exit 0
 elif [[ ! -z "$CLANG_PLUGIN_STATISTICS" ]]; then
     cmake \
         -GNinja \
