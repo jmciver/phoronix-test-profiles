@@ -15,6 +15,7 @@ cd build
 if [[ ! -z "$ALIVECC_PARALLEL_FIFO" ]]; then
     cmake .. -DCMAKE_BUILD_TYPE=Release -DSIMDJSON_JUST_LIBRARY=ON
     "$ALIVE2_JOB_SERVER_PATH" "-j${ALIVE2_JOB_SERVER_THREADS}" make "-j${NUM_CPU_CORES}"
+    exit 0
 elif [[ ! -z "$CLANG_PLUGIN_STATISTICS" ]]; then
     cmake -GNinja \
           -DCMAKE_BUILD_TYPE=Release \
